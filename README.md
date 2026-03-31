@@ -1,38 +1,102 @@
-# Welcome to MERN Login System
+# MERN Stack Authentication System (Secure Version)
 
-Hello everyone, In this project, we are going to create **MERN Stack App with Login System**. 
-We will take a look at how to create login, registration, profile, reset password routes and learn
-how to send Mail from the Node.js backend application.
+A full-featured **MERN (MongoDB, Express, React, Node.js) authentication system** with **JWT-based login, registration, and role-based access control**, built with best practices for security.
 
-## Working with the Project
+---
 
-Download this project from above link. Create two configaration files into the project.
-First in the client and second in the server.
+## Features
 
-In the Client Folder create .env file and put this code inside it.
+* User registration and login with **JWT tokens**
+* Role-based access control (admin, user) with protected routes
+* Passwords securely hashed with **bcrypt**
+* Token refresh and logout
+* RESTful API for frontend integration
 
-.env
+---
+
+## Tech Stack
+
+* **Frontend:** React, Context API / Redux, Axios
+* **Backend:** Node.js, Express.js, JWT, bcrypt
+* **Database:** MongoDB
+* **Environment:** dotenv for secret management
+
+---
+
+## Backend Setup (Secure)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yanmyoaung2004/AuthenticationSystem-MERN.git
+cd AuthenticationSystem-MERN/backend
 ```
-REACT_APP_SERVER_DOMAIN='<server_domain>' # example 'http://localhost:8080'
+
+### 2. Install dependencies
+
+```bash
+npm install
 ```
 
+### 3. Create `.env` file
 
-After that create a file in the Server Folder with the name config.js and put the below code inside it.
+Create a `.env` file in the `backend/` folder:
 
-config.js
 ```
+JWT_SECRET=<your_jwt_secret_here>
+EMAIL=<your_testing_email>
+PASSWORD=<your_email_password>
+ATLAS_URI=<your_mongodb_atlas_uri>
+```
+
+**Note:** Do **not** commit this file to GitHub. Add `.env` to `.gitignore`.
+
+### 4. Update `config.js` to use environment variables
+
+```javascript
+// config.js
 export default {
-    JWT_SECRET : "<secret>",
-    EMAIL: "steve.franecki@ethereal.email", // testing email & password
-    PASSWORD : "sMf46xCzrvdrxvuagc",
-    ATLAS_URI: "<MONGODB_ATLAS_URI>"
-}
+    JWT_SECRET: process.env.JWT_SECRET,
+    EMAIL: process.env.EMAIL,
+    PASSWORD: process.env.PASSWORD,
+    ATLAS_URI: process.env.ATLAS_URI
+};
 ```
 
-> **Note:** The **ATLAS_URI** is important to work this project.
+### 5. Load `.env` in your entry file
 
-Now, create all these variables in the project and make sure you set ATLAS_URI variable.
-Otherwise, the project will not work.
+```javascript
+// server.js or app.js
+import dotenv from 'dotenv';
+dotenv.config();
+```
 
-Learn More about this project from the
-[ - Daily Tuition](https://www.youtube.com/c/@dailytuition) Youtube Channel.
+### 6. Run the backend
+
+```bash
+npm run dev
+```
+
+Backend will run on `http://localhost:5000` (default). Adjust proxy in frontend if needed.
+
+---
+
+## Frontend Setup
+
+```bash
+cd ../frontend
+npm install
+npm start
+```
+
+Frontend will run on `http://localhost:3000` and communicate securely with the backend.
+
+---
+
+## Key Benefits of This Approach
+
+1. **Secrets are safe** — JWT secret, email, and DB URI are never hard-coded.
+2. **Environment flexibility** — easily switch between dev, staging, and production.
+3. **Professional setup** — makes your repo look secure and ready for production.
+
+---
